@@ -29,16 +29,21 @@ export default function Home() {
 
   const filteredAdvocates = useMemo<Advocate[]>(() => {
     if (searchTerm) {
-      const cleanedSearchTerm = searchTerm.trim();
+      const cleanedSearchTerm = searchTerm.trim().toLocaleLowerCase();
       console.log('filtering advocates...');
       const filteredAdvocates = advocates.filter((advocate) => {
         return (
-          advocate.firstName.includes(cleanedSearchTerm) ||
-          advocate.lastName.includes(cleanedSearchTerm) ||
-          advocate.city.includes(cleanedSearchTerm) ||
-          advocate.degree.includes(cleanedSearchTerm) ||
-          advocate.specialties.join(' ').includes(cleanedSearchTerm) ||
-          `${advocate.yearsOfExperience}`.includes(cleanedSearchTerm)
+          advocate.firstName.toLocaleLowerCase().includes(cleanedSearchTerm) ||
+          advocate.lastName.toLocaleLowerCase().includes(cleanedSearchTerm) ||
+          advocate.city.toLocaleLowerCase().includes(cleanedSearchTerm) ||
+          advocate.degree.toLocaleLowerCase().includes(cleanedSearchTerm) ||
+          advocate.specialties
+            .join(' ')
+            .toLocaleLowerCase()
+            .includes(cleanedSearchTerm) ||
+          `${advocate.yearsOfExperience}`
+            .toLocaleLowerCase()
+            .includes(cleanedSearchTerm)
         );
       });
 
