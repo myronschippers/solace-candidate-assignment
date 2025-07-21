@@ -48,8 +48,8 @@ export default function Home() {
   }, [searchTerm, advocates]);
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const searchTerm = e.target.value;
-    setSearchTerm(searchTerm);
+    const newSearchTerm = e.target.value;
+    setSearchTerm(newSearchTerm);
   };
 
   const onClick = () => {
