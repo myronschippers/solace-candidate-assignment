@@ -29,20 +29,20 @@ export default function Home() {
 
   const filteredAdvocates = useMemo<Advocate[]>(() => {
     if (searchTerm) {
-      const cleanedSearchTerm = searchTerm.trim().toLocaleLowerCase();
+      const cleanedSearchTerm = searchTerm.trim().toLowerCase();
       console.log('filtering advocates...');
       const filteredAdvocates = advocates.filter((advocate) => {
         return (
-          advocate.firstName.toLocaleLowerCase().includes(cleanedSearchTerm) ||
-          advocate.lastName.toLocaleLowerCase().includes(cleanedSearchTerm) ||
-          advocate.city.toLocaleLowerCase().includes(cleanedSearchTerm) ||
-          advocate.degree.toLocaleLowerCase().includes(cleanedSearchTerm) ||
+          advocate.firstName.toLowerCase().includes(cleanedSearchTerm) ||
+          advocate.lastName.toLowerCase().includes(cleanedSearchTerm) ||
+          advocate.city.toLowerCase().includes(cleanedSearchTerm) ||
+          advocate.degree.toLowerCase().includes(cleanedSearchTerm) ||
           advocate.specialties
             .join(' ')
-            .toLocaleLowerCase()
+            .toLowerCase()
             .includes(cleanedSearchTerm) ||
           `${advocate.yearsOfExperience}`
-            .toLocaleLowerCase()
+            .toLowerCase()
             .includes(cleanedSearchTerm)
         );
       });
