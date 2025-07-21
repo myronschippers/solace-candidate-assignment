@@ -3,6 +3,7 @@
 import { useEffect, useState, useMemo, type ChangeEvent } from 'react';
 
 import type { Advocate } from './types';
+import { AdvocatesSearch } from './components/AdvocatesSearch';
 import { AdvocatesTable } from './components/AdvocatesTable';
 
 export default function Home() {
@@ -44,14 +45,8 @@ export default function Home() {
     return advocates;
   }, [searchTerm, advocates]);
 
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const newSearchTerm = e.target.value;
+  const onSearchTermUpdate = (newSearchTerm: string) => {
     setSearchTerm(newSearchTerm);
-  };
-
-  const onClick = () => {
-    console.log(advocates);
-    setSearchTerm('');
   };
 
   return (
@@ -59,18 +54,7 @@ export default function Home() {
       <h1>Solace Advocates</h1>
       <br />
       <br />
-      <div>
-        <p>Search</p>
-        <p>
-          Searching for: <span id="search-term"></span>
-        </p>
-        <input
-          style={{ border: '1px solid black' }}
-          value={searchTerm}
-          onChange={onChange}
-        />
-        <button onClick={onClick}>Reset Search</button>
-      </div>
+      <AdvocatesSearch searchTermCallback={onSearchTermUpdate} />
       <br />
       <br />
       <AdvocatesTable advocates={filteredAdvocates} />
