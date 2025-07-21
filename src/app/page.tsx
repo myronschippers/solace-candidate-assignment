@@ -37,7 +37,7 @@ export default function Home() {
           advocate.lastName.includes(cleanedSearchTerm) ||
           advocate.city.includes(cleanedSearchTerm) ||
           advocate.degree.includes(cleanedSearchTerm) ||
-          advocate.specialties.includes(cleanedSearchTerm) ||
+          advocate.specialties.join(' ').includes(cleanedSearchTerm) ||
           `${advocate.yearsOfExperience}`.includes(cleanedSearchTerm)
         );
       });
