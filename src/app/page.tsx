@@ -4,7 +4,7 @@ import { useEffect, useState, useMemo } from 'react';
 
 import { AdvocatesSearch } from '@/components/AdvocatesSearch';
 import { AdvocatesTable } from '@/components/AdvocatesTable';
-import { Header } from '@/components/Header';
+import { PgTitle } from '@/components/PgTitle';
 
 import type { Advocate } from './types';
 
@@ -53,7 +53,7 @@ export default function Home() {
 
   return (
     <>
-      <Header />
+      <PgTitle />
       <br />
       <br />
       <AdvocatesSearch searchTermCallback={onSearchTermUpdate} />
