@@ -1,5 +1,9 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+
+import { Footer } from '@/components/template/Footer';
+import { Header } from '@/components/template/Header';
+
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -18,9 +22,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} bg-layer-base`}>
         <div className="flex flex-col w-[100%] gap-2">
-          <header>Solace Engineering Assignment</header>
+          <Header />
           <main>{children}</main>
-          <footer>&copy; 2025</footer>
+          <Footer />
         </div>
       </body>
     </html>
