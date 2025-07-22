@@ -1,10 +1,12 @@
 'use client';
 
-import { useEffect, useState, useMemo, type ChangeEvent } from 'react';
+import { useEffect, useState, useMemo } from 'react';
+
+import { AdvocatesSearch } from '@/components/AdvocatesSearch';
+import { AdvocatesTable } from '@/components/AdvocatesTable';
+import { Header } from '@/components/Header';
 
 import type { Advocate } from './types';
-import { AdvocatesSearch } from '../components/AdvocatesSearch';
-import { AdvocatesTable } from '../components/AdvocatesTable';
 
 export default function Home() {
   const [advocates, setAdvocates] = useState<Advocate[]>([]);
@@ -51,7 +53,7 @@ export default function Home() {
 
   return (
     <main style={{ margin: '24px' }}>
-      <h1>Solace Advocates</h1>
+      <Header />
       <br />
       <br />
       <AdvocatesSearch searchTermCallback={onSearchTermUpdate} />
