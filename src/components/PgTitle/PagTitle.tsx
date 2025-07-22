@@ -2,10 +2,10 @@
 
 import { type FC } from 'react';
 
-import type { HeaderProps } from './types';
+import type { PgTitleProps } from './types';
 
-const Header: FC<HeaderProps> = () => {
+const PgTitle: FC<PgTitleProps> = () => {
   return <h1>Solace Advocates</h1>;
 };
 
-export default Header;
+export default PgTitle;
