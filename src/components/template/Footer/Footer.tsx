@@ -6,7 +6,7 @@ import type { FooterProps } from './types';
 
 const Footer: FC<FooterProps> = () => {
   return (
-    <footer>
+    <footer className="flex-shrink-0">
       <p className="font-size-sm">&copy; {new Date().getFullYear()}</p>
     </footer>
   );

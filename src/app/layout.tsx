@@ -20,12 +20,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-layer-base`}>
-        <div className="flex flex-col w-[100%] gap-2">
-          <Header />
-          <main>{children}</main>
-          <Footer />
-        </div>
+      <body
+        className={`${inter.className} bg-layer-base flex flex-col w-[100%] gap-2`}
+      >
+        <Header />
+        <main className="flex-[1_0_auto]">{children}</main>
+        <Footer />
       </body>
     </html>
   );
