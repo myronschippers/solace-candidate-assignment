@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@theme {
+  --color-layer-base: #eaeffb;
+  --color-layer-foreground: #ffffff;
+  --color-layer-back: #0c55cc;
+  /* ... */
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background-color: var(--color-layer-base);
+}

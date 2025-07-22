@@ -52,7 +52,7 @@ export default function Home() {
   };
 
   return (
-    <main style={{ margin: '24px' }}>
+    <>
       <Header />
       <br />
       <br />
@@ -60,6 +60,6 @@ export default function Home() {
       <br />
       <br />
       <AdvocatesTable advocates={filteredAdvocates} />
-    </main>
+    </>
   );
 }
