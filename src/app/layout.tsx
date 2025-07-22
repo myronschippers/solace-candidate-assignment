@@ -16,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${inter.className} bg-layer-base`}>
         <div className="flex flex-col w-[100%] gap-2">
           <header>Solace Engineering Assignment</header>
           <main>{children}</main>
