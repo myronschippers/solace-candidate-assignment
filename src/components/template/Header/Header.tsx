@@ -8,9 +8,9 @@ import type { HeaderProps } from './types';
 
 const Header: FC<HeaderProps> = () => {
   return (
-    <header>
+    <header className="pt-2">
       <ContentWrapper>
-        <div className="bg-blue-700 text-white px-2 py-4 border-b-2 border-blue-900">
+        <div className="bg-blue-700 text-white px-6 py-4 border-b-2 border-layer-tinted rounded-full">
           <h1>Solace Engineering Assignment</h1>
         </div>
       </ContentWrapper>

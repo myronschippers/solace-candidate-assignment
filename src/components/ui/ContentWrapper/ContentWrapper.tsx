@@ -28,9 +28,11 @@ const ContentWrapper: FC<ContentWrapperProps> = ({
 
   return (
     <div
-      className={`max-width-[100%] width-[${wrapperWidth}] mx-auto ${
-        variant !== 'full-bleed' ? 'px-2' : ''
-      } md:px-0`}
+      className={`mx-auto ${variant !== 'full-bleed' ? 'px-2' : ''} md:px-0`}
+      style={{
+        maxWidth: '100%',
+        width: wrapperWidth,
+      }}
     >
       {children}
     </div>
