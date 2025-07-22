@@ -3,8 +3,8 @@
 import { useEffect, useState, useMemo, type ChangeEvent } from 'react';
 
 import type { Advocate } from './types';
-import { AdvocatesSearch } from './components/AdvocatesSearch';
-import { AdvocatesTable } from './components/AdvocatesTable';
+import { AdvocatesSearch } from '../components/AdvocatesSearch';
+import { AdvocatesTable } from '../components/AdvocatesTable';
 
 export default function Home() {
   const [advocates, setAdvocates] = useState<Advocate[]>([]);
