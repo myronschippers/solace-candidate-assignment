@@ -17,6 +17,8 @@ const ContentWrapper: FC<ContentWrapperProps> = ({
         return '1200px';
       case 'full':
         return '100%';
+      case 'full-bleed':
+        return '100%';
       case 'regular':
         return DEFAULT_WIDTH;
       default:
@@ -25,7 +27,11 @@ const ContentWrapper: FC<ContentWrapperProps> = ({
   }, [variant]);
 
   return (
-    <div className={`max-width-[100%] width-[${wrapperWidth}] mx-auto`}>
+    <div
+      className={`max-width-[100%] width-[${wrapperWidth}] mx-auto ${
+        variant !== 'full-bleed' ? 'px-2' : ''
+      } md:px-0`}
+    >
       {children}
     </div>
   );
