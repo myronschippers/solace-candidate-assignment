@@ -1,5 +1,5 @@
 import { NextResponse, NextRequest } from 'next/server';
-import { ilike, or, eq } from 'drizzle-orm';
+import { ilike, or, eq, sql } from 'drizzle-orm';
 
 import db from '@/db';
 import { advocates } from '@/db/schema';
@@ -31,7 +31,18 @@ export async function POST(req: NextRequest) {
           ilike(advocates.degree, cleanedSearchTerm),
           isSearchNumber
             ? eq(advocates.yearsOfExperience, searchAsNumber)
-            : undefined
+            : undefined,
+          // Having problems with the search of the jsonb array of strings for payload/specialties
+          sql`EXISTS (
+            SELECT 1
+            FROM jsonb_array_elements_text(
+              CASE
+                WHEN jsonb_typeof(${advocates.specialties}) = 'array' THEN ${advocates.specialties}
+                ELSE '[]'::jsonb
+              END
+            ) AS elem
+            WHERE elem ILIKE ${cleanedSearchTerm}::text
+          )`
         )
       );
 
