@@ -13,7 +13,7 @@ const AdvocatesTable: FC<AdvocatesTableProps> = ({ advocates }) => {
   return (
     <ContentWrapper>
       <Paper>
-        <table className="table-auto border-collapse border-spacing-2 border border-slate-500 text-sm align-top">
+        <table className="table-auto border-collapse border-spacing-2 border border-slate-500 text-sm align-top w-full">
           <thead>
             <tr>
               <Th>First Name</Th>
