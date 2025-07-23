@@ -55,7 +55,7 @@ export async function POST(req: NextRequest) {
   } catch (error: any) {
     console.error('Error searching advocates:', error);
     return new NextResponse(
-      `There was an error searching advocates. ${error.message}`,
+      'An unexpected error occurred searching advocates. Please try again later.',
       { status: 500 }
     );
   }
