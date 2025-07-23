@@ -13,7 +13,10 @@ export async function GET() {
     // const data = advocateData;
 
     return NextResponse.json({ data });
-  } catch (error) {
-    return new NextResponse('There was an error fetching advocates.');
+  } catch (error: any) {
+    return new NextResponse(
+      `There was an error fetching advocates. ${error.message}`,
+      { status: 500 }
+    );
   }
 }
