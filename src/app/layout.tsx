@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.className} bg-layer-base flex flex-col w-[100%] gap-2`}
+        className={`${inter.className} bg-layer-base flex flex-col w-[100%]`}
       >
         <Header />
         <main className="flex-[1_0_auto]">{children}</main>
