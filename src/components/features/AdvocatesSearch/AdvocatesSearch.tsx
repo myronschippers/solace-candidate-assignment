@@ -42,9 +42,6 @@ const AdvocatesSearch: FC<AdvocatesSearchProps> = ({ searchTermCallback }) => {
             <ArrowPathIcon className="size-5 text-white" />
           </button>
         </div>
-        <p className="text-italic text-sm">
-          Searching for: <span id="search-term">{searchTerm}</span>
-        </p>
       </Paper>
     </div>
   );
