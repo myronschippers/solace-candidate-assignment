@@ -3,8 +3,8 @@
 import { useEffect, useState, useMemo } from 'react';
 
 import { AdvocatesSearch } from '@/components/features/AdvocatesSearch';
-import { AdvocatesTable } from '@/components/AdvocatesTable';
-import { PgTitle } from '@/components/PgTitle';
+import { AdvocatesTable } from '@/components/features/AdvocatesTable';
+import { PgTitle } from '@/components/template/PgTitle';
 
 import type { Advocate } from './types';
 
