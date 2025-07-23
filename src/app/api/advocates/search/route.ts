@@ -1,5 +1,5 @@
 import { NextResponse, NextRequest } from 'next/server';
-import { ilike, or } from 'drizzle-orm';
+import { ilike, or, eq } from 'drizzle-orm';
 
 import db from '@/db';
 import { advocates } from '@/db/schema';
@@ -24,12 +24,15 @@ export async function POST(req: NextRequest) {
       .where(
         or(
           ilike(advocates.firstName, cleanedSearchTerm),
-          ilike(advocates.lastName, cleanedSearchTerm)
+          ilike(advocates.lastName, cleanedSearchTerm),
+          ilike(advocates.city, cleanedSearchTerm),
+          ilike(advocates.degree, cleanedSearchTerm)
         )
       );
 
     return NextResponse.json({ data });
   } catch (error: any) {
+    console.error('Error searching advocates:', error);
     return new NextResponse(
       `There was an error searching advocates. ${error.message}`,
       { status: 500 }
