@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useMemo, useCallback } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import debounce from 'lodash.debounce';
 
 import { AdvocatesSearch } from '@/components/features/AdvocatesSearch';
