@@ -1,18 +1,12 @@
 'use client';
 
-import { useEffect, useState, useMemo, type ChangeEvent } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 
-type Advocate = {
-  city: string;
-  createdAt: string;
-  degree: string;
-  firstName: string;
-  id: number;
-  lastName: string;
-  phoneNumber: number;
-  specialties: string[];
-  yearsOfExperience: number;
-};
+import { AdvocatesSearch } from '@/components/features/AdvocatesSearch';
+import { AdvocatesTable } from '@/components/features/AdvocatesTable';
+import { PgTitle } from '@/components/template/PgTitle';
+
+import type { Advocate } from './types';
 
 export default function Home() {
   const [advocates, setAdvocates] = useState<Advocate[]>([]);
@@ -53,65 +47,19 @@ export default function Home() {
     return advocates;
   }, [searchTerm, advocates]);
 
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const newSearchTerm = e.target.value;
+  const onSearchTermUpdate = (newSearchTerm: string) => {
     setSearchTerm(newSearchTerm);
   };
 
-  const onClick = () => {
-    console.log(advocates);
-    setSearchTerm('');
-  };
-
   return (
-    <main style={{ margin: '24px' }}>
-      <h1>Solace Advocates</h1>
+    <>
+      <PgTitle />
       <br />
       <br />
-      <div>
-        <p>Search</p>
-        <p>
-          Searching for: <span id="search-term"></span>
-        </p>
-        <input
-          style={{ border: '1px solid black' }}
-          value={searchTerm}
-          onChange={onChange}
-        />
-        <button onClick={onClick}>Reset Search</button>
-      </div>
+      <AdvocatesSearch searchTermCallback={onSearchTermUpdate} />
       <br />
       <br />
-      <table>
-        <thead>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>City</th>
-          <th>Degree</th>
-          <th>Specialties</th>
-          <th>Years of Experience</th>
-          <th>Phone Number</th>
-        </thead>
-        <tbody>
-          {filteredAdvocates.map((advocate) => {
-            return (
-              <tr key={advocate.id}>
-                <td>{advocate.firstName}</td>
-                <td>{advocate.lastName}</td>
-                <td>{advocate.city}</td>
-                <td>{advocate.degree}</td>
-                <td>
-                  {advocate.specialties.map((s, sIndex) => (
-                    <div key={sIndex}>{s}</div>
-                  ))}
-                </td>
-                <td>{advocate.yearsOfExperience}</td>
-                <td>{advocate.phoneNumber}</td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    </main>
+      <AdvocatesTable advocates={filteredAdvocates} />
+    </>
   );
 }
