@@ -3,8 +3,8 @@
 import { useEffect, useState, type FC, type ChangeEvent } from 'react';
 import { ArrowPathIcon } from '@heroicons/react/24/solid';
 
-import { ContentWrapper } from '@/components/ui/ContentWrapper';
 import { InputField } from '@/components/ui/InputField';
+import { Paper } from '@/components/ui/Paper';
 
 import type { AdvocatesSearchProps } from './types';
 
@@ -26,7 +26,7 @@ const AdvocatesSearch: FC<AdvocatesSearchProps> = ({ searchTermCallback }) => {
 
   return (
     <div className="w-full flex flex-row justify-center">
-      <div className="flex flex-col gap-2 bg-white text-blue-950 p-6 rounded-md shadow-md">
+      <Paper className="flex flex-col gap-2 text-blue-950">
         <div className="flex flex-row gap-2 items-center">
           <InputField
             variant="inline"
@@ -45,7 +45,7 @@ const AdvocatesSearch: FC<AdvocatesSearchProps> = ({ searchTermCallback }) => {
         <p className="text-italic text-sm">
           Searching for: <span id="search-term">{searchTerm}</span>
         </p>
-      </div>
+      </Paper>
     </div>
   );
 };
