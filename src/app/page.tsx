@@ -43,8 +43,6 @@ export default function Home() {
   }, [searchTerm]);
 
   const filteredAdvocates = useMemo<Advocate[]>(() => {
-    console.log('!!!FILTERED - searchTerm:', searchTerm);
-    console.log('!!!FILTERED - searchTerm check:', !searchTerm);
     if (!!searchTerm && searchedAdvocates != null) {
       return searchedAdvocates;
     }
