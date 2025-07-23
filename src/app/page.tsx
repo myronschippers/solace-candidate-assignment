@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState, useMemo } from 'react';
+import debounce from 'lodash.debounce';
 
 import { AdvocatesSearch } from '@/components/features/AdvocatesSearch';
 import { AdvocatesTable } from '@/components/features/AdvocatesTable';
@@ -10,10 +11,12 @@ import type { Advocate } from './types';
 
 export default function Home() {
   const [advocates, setAdvocates] = useState<Advocate[]>([]);
+  const [searchedAdvocates, setSearchedAdvocates] = useState<Advocate[] | null>(
+    null
+  );
   const [searchTerm, setSearchTerm] = useState<string>('');
 
   useEffect(() => {
-    console.log('fetching advocates...');
     fetch('/api/advocates').then((response) => {
       response.json().then((jsonResponse) => {
         setAdvocates(jsonResponse.data);
@@ -21,45 +24,48 @@ export default function Home() {
     });
   }, []);
 
-  const filteredAdvocates = useMemo<Advocate[]>(() => {
-    if (searchTerm) {
-      const cleanedSearchTerm = searchTerm.trim().toLowerCase();
-      console.log('filtering advocates...');
-      const filteredAdvocates = advocates.filter((advocate) => {
-        return (
-          advocate.firstName.toLowerCase().includes(cleanedSearchTerm) ||
-          advocate.lastName.toLowerCase().includes(cleanedSearchTerm) ||
-          advocate.city.toLowerCase().includes(cleanedSearchTerm) ||
-          advocate.degree.toLowerCase().includes(cleanedSearchTerm) ||
-          advocate.specialties
-            .join(' ')
-            .toLowerCase()
-            .includes(cleanedSearchTerm) ||
-          `${advocate.yearsOfExperience}`
-            .toLowerCase()
-            .includes(cleanedSearchTerm)
-        );
-      });
+  useEffect(() => {
+    if (!searchTerm) {
+      return;
+    }
 
-      return filteredAdvocates;
+    fetch('/api/advocates/search', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ searchTerm: searchTerm }),
+    }).then((response) => {
+      response.json().then((jsonResponse) => {
+        setSearchedAdvocates(jsonResponse.data);
+      });
+    });
+  }, [searchTerm]);
+
+  const filteredAdvocates = useMemo<Advocate[]>(() => {
+    if (!!searchTerm && searchedAdvocates != null) {
+      return searchedAdvocates;
     }
 
     return advocates;
-  }, [searchTerm, advocates]);
+  }, [searchTerm, advocates, searchedAdvocates]);
+
+  const debounceSetSearchTermValue = debounce((newSearchTerm: string) => {
+    const cleanedSearchTerm = newSearchTerm.trim();
+
+    setSearchTerm(cleanedSearchTerm);
+  }, 600);
 
   const onSearchTermUpdate = (newSearchTerm: string) => {
-    setSearchTerm(newSearchTerm);
+    debounceSetSearchTermValue(newSearchTerm);
   };
 
   return (
-    <>
+    <div className="flex flex-col gap-10">
       <PgTitle />
-      <br />
-      <br />
       <AdvocatesSearch searchTermCallback={onSearchTermUpdate} />
-      <br />
-      <br />
+      {/* TOPIC: loading indicator should be used during the fetching of search results and initial load */}
       <AdvocatesTable advocates={filteredAdvocates} />
-    </>
+    </div>
   );
 }

@@ -13,7 +13,7 @@ const AdvocatesTable: FC<AdvocatesTableProps> = ({ advocates }) => {
   return (
     <ContentWrapper>
       <Paper>
-        <table className="table-auto border-collapse border-spacing-2 border border-slate-500 text-sm align-top">
+        <table className="table-auto border-collapse border-spacing-2 border border-slate-500 text-sm align-top w-full">
           <thead>
             <tr>
               <Th>First Name</Th>
@@ -34,6 +34,10 @@ const AdvocatesTable: FC<AdvocatesTableProps> = ({ advocates }) => {
                   <Td>{advocate.city}</Td>
                   <Td>{advocate.degree}</Td>
                   <Td>
+                    {/*
+                      TOPIC: Specialties could be handled a little differently for display so they were more organized (sorted)
+                      -- could also use an accordion of some sort to hide the bulk of them
+                     */}
                     {advocate.specialties.map((s, sIndex) => (
                       <div key={sIndex}>{s}</div>
                     ))}
