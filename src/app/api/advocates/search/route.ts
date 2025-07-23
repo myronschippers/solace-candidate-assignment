@@ -17,6 +17,8 @@ export async function POST(req: NextRequest) {
     }
 
     const cleanedSearchTerm = `%${searchTerm.trim().toLowerCase()}%`;
+    const searchAsNumber = Number(searchTerm);
+    const isSearchNumber = !isNaN(searchAsNumber);
 
     const data = await db
       .select()
@@ -26,7 +28,10 @@ export async function POST(req: NextRequest) {
           ilike(advocates.firstName, cleanedSearchTerm),
           ilike(advocates.lastName, cleanedSearchTerm),
           ilike(advocates.city, cleanedSearchTerm),
-          ilike(advocates.degree, cleanedSearchTerm)
+          ilike(advocates.degree, cleanedSearchTerm),
+          isSearchNumber
+            ? eq(advocates.yearsOfExperience, searchAsNumber)
+            : undefined
         )
       );
 
