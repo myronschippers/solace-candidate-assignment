@@ -10,12 +10,10 @@ const Header: FC<HeaderProps> = () => {
   return (
     <header className="py-2 bg-blue-600">
       <ContentWrapper>
-        <div className="bg-blue-100 text-blue-950 px-6 py-2 border-b-2 border-blue-900 rounded-full">
+        <div className="bg-blue-400 text-white px-6 py-2 rounded-full shadow-md">
           <h1 className="flex flex-col gap-1">
             <span className="text-lg leading-none">Solace</span>
-            <span className="text-sm leading-none text-blue-950">
-              Engineering Assignment
-            </span>
+            <span className="text-sm leading-none">Engineering Assignment</span>
           </h1>
         </div>
       </ContentWrapper>
