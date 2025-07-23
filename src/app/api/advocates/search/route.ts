@@ -25,6 +25,8 @@ export async function POST(req: NextRequest) {
       .from(advocates)
       .where(
         or(
+          // TOPIC: keeping in mind that the database and search capabilities may expand
+          // -- it would be a good idea to make this less manual and a little more dynamic
           ilike(advocates.firstName, cleanedSearchTerm),
           ilike(advocates.lastName, cleanedSearchTerm),
           ilike(advocates.city, cleanedSearchTerm),
@@ -32,7 +34,8 @@ export async function POST(req: NextRequest) {
           isSearchNumber
             ? eq(advocates.yearsOfExperience, searchAsNumber)
             : undefined,
-          // Having problems with the search of the jsonb array of strings for payload/specialties
+          // TOPIC: Having problems with the search of the jsonb array of strings for payload/specialties
+          // -- could not get jsonb_path_exists() to work
           sql`EXISTS (
             SELECT 1
             FROM jsonb_array_elements_text(
@@ -45,6 +48,8 @@ export async function POST(req: NextRequest) {
           )`
         )
       );
+    // TOPIC: as the database scales larger returning the entire set will be too expensive
+    // -- the use of a limit and offset to return results in a paginated list would be a good idea
 
     return NextResponse.json({ data });
   } catch (error: any) {
