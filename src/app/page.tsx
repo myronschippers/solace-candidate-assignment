@@ -64,6 +64,7 @@ export default function Home() {
     <div className="flex flex-col gap-10">
       <PgTitle />
       <AdvocatesSearch searchTermCallback={onSearchTermUpdate} />
+      {/* TOPIC: loading indicator should be used during the fetching of search results and initial load */}
       <AdvocatesTable advocates={filteredAdvocates} />
     </div>
   );
