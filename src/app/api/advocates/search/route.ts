@@ -36,16 +36,9 @@ export async function POST(req: NextRequest) {
             : undefined,
           // TOPIC: Having problems with the search of the jsonb array of strings for payload/specialties
           // -- could not get jsonb_path_exists() to work
-          sql`EXISTS (
-            SELECT 1
-            FROM jsonb_array_elements_text(
-              CASE
-                WHEN jsonb_typeof(${advocates.specialties}) = 'array' THEN ${advocates.specialties}
-                ELSE '[]'::jsonb
-              END
-            ) AS elem
-            WHERE elem ILIKE ${cleanedSearchTerm}::text
-          )`
+          // -- drizzle stringifies the specialties array of strings during seeding and now it is not searchable as a jsonb array
+          //    (example: "[\"Weight loss & nutrition\"]")
+          sql`${advocates.specialties} @> ${searchTerm.trim()}`
         )
       );
     // TOPIC: as the database scales larger returning the entire set will be too expensive
