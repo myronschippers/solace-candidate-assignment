@@ -46,3 +46,4 @@ curl -X POST http://localhost:3000/api/seed
 - [PR#2 - [Feature] Functional Search](https://github.com/myronschippers/solace-candidate-assignment/pull/2)
 - [PR#3 - [Feature] Componentizing and Styles](https://github.com/myronschippers/solace-candidate-assignment/pull/3)
 - [PR#4 - [Feature] Performance](https://github.com/myronschippers/solace-candidate-assignment/pull/4)
+- [PR#5 - [Feature] Clean Up](https://github.com/myronschippers/solace-candidate-assignment/pull/5)
